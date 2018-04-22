@@ -8,11 +8,27 @@
 
 import UIKit
 
+var keyword:String = ""
+var type: String = "user"
+var idBuf: String! = ""
+
 class ViewController: UIViewController {
 
+    @IBOutlet weak var searchText: UITextField!
+   
+    @IBAction func submit(_ sender: UIButton) {
+        keyword = searchText.text!
+    }
+    @IBOutlet weak var back: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        back.target = self.revealViewController()
+        back.action = #selector(SWRevealViewController.revealToggle(_:))
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        
+     
     }
 
     override func didReceiveMemoryWarning() {
